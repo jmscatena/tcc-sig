@@ -1,0 +1,47 @@
+/* 
+    Created on : Sep 21, 2018, 4:43:03 PM
+    Author     : Jean Miler Scatena
+*/
+
+
+/* definitions for screen with width=1024px */
+.title{
+    margin:2% 0 2% 0%;
+    text-align: center;
+    font-size: 2em;
+    color:blue;
+    width: 100%;
+}
+div{
+    display: inline;
+    position: absolute;
+}
+
+.outscreen{
+    margin-left: 2%;
+    width: 950px;
+}
+.inscreen{
+    margin-left: 2%;
+    width: 550px;
+}
+
+.tablescreen{
+    width: 290px;
+    margin: 0 0 0 560px;
+}
+.buttons{
+    margin-right:15%;
+    margin-left:35%;    
+}
+
+.textlong{
+    width:50%;
+}
+
+.textshort{
+    width:22%;
+}
+
+
+

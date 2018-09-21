@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+          
+    <head jsf:id="head">
+        <title>Cadastro de Professores</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" 
+        content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../Resources/css/main.css" />
+        <style type="text/css">
+           @import url(#{facesContext.externalContext.request.contextPath}/Resources/css/main.css);
+        </style>
+
+    </head>
+    <body jsf:id="body">
+        <form jsf:id="form" jsf:prependId="false">
+            <div class="outscreen">
+                <div class="inscreen">
+                    <label class="title">Cadastro de Professor</label>
+                    <br/>
+                    <br/>
+
+                    <label> Matrícula </label>
+                    <input type="text" jsf:id="registro" style="margin-left: 70px;"
+                           class="textshort"
+                           jsf:value="#{}" 
+                           placeholder="Matrícula"/>
+                    <br/>
+                    <br/>
+                    <label> Professor </label>
+                    <input type="text" jsf:id="nome" style="margin-left: 65px;" class="textlong"
+                           jsf:value="#{}" 
+                           placeholder="Digite o Nome..." />
+                    <br />
+                    <br />
+                    <label> Email Institucional</label>
+                    <input type="email" jsf:id="email" style="margin-left: 7px;" class="textlong"
+                           jsf:value="#{}" 
+                           placeholder ="Digite o Email..." />
+                    <br />
+                    <br />
+                    <label> Celular </label>
+                    <input type="tel" jsf:id="telefone" style="margin-left: 85px;" class="textshort"
+                           jsf:value="#{}"
+                           placeholder="Telefone" />
+                    <br />
+                    <br />
+                    <label style="vertical-align: middle;height: 100px;"> Área de Pesquisa </label>
+                    <textarea jsf:id="area" style="width:350px;height: 200px;margin-left: 15px;"
+                           jsf:value="#{}"
+                           placeholder="Digita a Área de Pesquisa"></textarea> 
+                    <br />
+                    <div style="text-align:center;">
+                        <input type="checkbox" jsf:id="coordenador"
+                               jsf:value="#{}" />
+                        <label for="coordenador">Coordenador</label>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <a href="#" class="btn btn-primary buttons"
+                       jsf:action="#{}">Salvar</a>
+                    <a href="#" class="btn btn-primary"
+                       jsf:action="#{}">Excluir</a>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+               </div>
+               <div class="tablescreen">
+                    <label class="title">Professores</label>
+                    <br />
+                    <table class="table table-striped table-hover" >
+                        <tr>
+                            <td>Nome</td>
+                        </tr>
+                        <ui:repeat var="contato" value="#{beanContato.listar()}" >
+                            <tr>
+                                <td>#{contato.nome}</td>
+                            </tr>
+                        </ui:repeat>
+                    </table> 
+               </div>
+           </div>
+            
+        </form>
+    </body>
+
+</html>
+
