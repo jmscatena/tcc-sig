@@ -1,0 +1,57 @@
+/* 
+    Created on : Sep 21, 2018, 4:43:03 PM
+    Author     : Jean Miler Scatena
+*/
+
+
+/* definitions for screen with width=1024px */
+.title{
+    margin:2% 0 2% 0%;
+    text-align: center;
+    font-size: 2em;
+    color:blue;
+    width: 100%;
+}
+.buttons{
+    /*margin-right:15%;
+    margin-left:25%;  */
+    border-radius: 10px;
+}
+
+.textlong{
+    width:50% !important;
+    display:inline !important;
+}
+
+.texttile{
+    width:65% !important;
+    display:inline !important;
+}
+
+
+
+.textshort{
+    width:32% !important;
+    display:inline !important;  
+}
+
+.textarea{
+    width:350px !important;
+    height: 200px !important;
+    margin-left: 15px !important;
+    display:inline !important;
+}
+
+.imgcard{
+    
+    width:400px;
+    /*background-color: #ccd0db;*/
+    align-content: center;
+}
+
+.imgcard img{
+    width:200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

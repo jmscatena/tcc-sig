@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+          
+    <head jsf:id="head">
+        <title>Aceite de Orientação</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="../resources/jquery/jquery-3.3.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" />
+
+        <script src="../resources/bootstrap/js/bootstrap.js"></script>
+
+        <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="../resources/css/main.css" />
+    
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(".telefone").mask("(99)99999-9999");      
+            });             
+        </script>
+
+    </head>
+    
+    <body jsf:id="body" style="background-color:#dde9fe;">
+        <form jsf:id="form" jsf:prependId="false">
+            <div class="container" >
+              <h2>Cadastro de Aluno</h2>
+                  <div class="card" style="width:400px;border-radius: 25px;">
+                      <div class="imgcard">
+                          <img class="card-img-top" src="../resources/img/avatar/student_card.jpg" alt="Card image">
+                              <hr/>
+                      </div>
+                    <div class="card-body">
+                        <input type="text" jsf:id="ra" class="form-control item" style="width: 35%;display:inline;"
+                               jsf:value="#{}" 
+                               placeholder="Matrícula"/>
+
+                        <div class="dropdown" style="display: inline;margin-top:0px;">
+                            <button class="btn btn-default dropdown-toggle" 
+                                    type="button" id="cursos" data-toggle="dropdown">Curso
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <ui:repeat var="lista" value="#{}">
+                                    <li role="presentation">
+                                        <!-- beanLigacoes.adiconar_contato(lista) adiciona em outro bean (chave estrangeira) -->
+                                        <a role="menuitem" tabindex="-1" href="#" jsf:action="#{beanLigacoes.adiconar_contato(lista)}">
+                                            #{lista.nome}
+                                        </a>
+                                </li>
+                              </ui:repeat>
+                            </ul>
+                          </div>
+
+                        <br/>
+                        <br/>
+                        <input type="text" jsf:id="nome" class="form-control item"
+                               jsf:value="#{}" 
+                               placeholder="Nome" />
+                        <br />
+                        <input type="email" jsf:id="email" class="form-control item"
+                               jsf:value="#{}" 
+                               placeholder ="Email" />
+                        <br />
+                        <input type="tel" jsf:id="telefone" class="form-control item telefone" style="width: 45%;" 
+                               jsf:value="#{}" placeholder="Telefone" />
+
+                        <br />
+
+
+                        <a href="#" class="btn btn-outline-success buttons"
+                           jsf:action="#{}">Gravar</a>
+                        <a href="#" class="btn btn-outline-danger buttons"
+                           jsf:action="#{}">Cancelar </a>
+
+                        <br />
+
+                    </div>
+                  </div>
+                  <br>
+
+            <!--
+            <div class="container">
+                  <div class="card" style="width:400px">
+                    <img class="card-img-top" src="../resources/img/avatar/student.jpg" alt="Student Avatar" style="width:100%" >
+                    <div class="card-body">
+                        <h4 class="card-title">Cadastro de Aluno</h4>
+                        <label> Matrícula </label>
+                        <input type="text" jsf:id="ra" style="margin-left: 20px!important;" class="textshort form-control"
+                               class="textshort"
+                               jsf:value="#{}" 
+                               placeholder="Matrícula"/>
+                        <br/>
+                        <br/>
+                        <label> Nome </label>
+                        <input type="text" jsf:id="nome" style="margin-left: 42px!important;" class="textlong form-control"
+                               jsf:value="#{}" 
+                               placeholder="Digite o Nome..." />
+                        <br />
+                        <br />
+                        <label> Email</label>
+                        <input type="email" jsf:id="email" style="margin-left: 47px;" class="textlong form-control"
+                               jsf:value="#{}" 
+                               placeholder ="Digite o Email..." />
+                        <br />
+                        <br />
+                        <label> Celular </label>
+                        <input type="tel" jsf:id="telefone" style="margin-left: 40px!important;" class="textshort form-control"
+                               jsf:value="#{}"
+                               placeholder="Telefone" />
+                        <br />
+                        <br />
+
+                        <div class="dropdown" >
+                            <button class="btn btn-default dropdown-toggle" 
+                                    type="button" id="cursos" data-toggle="dropdown">Curso
+                            <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                <ui:repeat var="lista" value="#{}">
+                                    <li role="presentation">
+                                        <!-- beanLigacoes.adiconar_contato(lista) adiciona em outro bean (chave estrangeira) -->
+                <!--                        <a role="menuitem" tabindex="-1" href="#" jsf:action="#{beanLigacoes.adiconar_contato(lista)}">
+                                            #{lista.nome}
+                                        </a>
+                                </li>
+                              </ui:repeat>
+                            </ul>
+                          </div>
+                        <br />
+                        <br />
+
+
+                        <a href="#" class="btn btn-outline-success buttons"
+                           jsf:action="#{}">Gravar</a>
+                        <a href="#" class="btn btn-outline-danger"
+                           jsf:action="#{}">Cancelar </a>
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </div>
+                  </div>
+            </div>
+            -->
+        </form>
+    </body>
+
+</html>
+

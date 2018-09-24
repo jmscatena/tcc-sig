@@ -4,18 +4,17 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf">
           
     <head jsf:id="head">
-        <title>Cadastro de Professores</title>
+        <title>Aceite de Orientação</title>
         <meta charset="utf-8" />
-        <meta name="viewport" 
-        content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="../Resources/css/main.css" />
-        <style type="text/css">
-           @import url(#{facesContext.externalContext.request.contextPath}/Resources/css/main.css);
-        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <script src="../resources/jquery/jquery-3.3.1.js"></script>
+        <script src="../resources/bootstrap/js/bootstrap.js"></script>
+
+        <link rel="stylesheet" href="../resources/css/main.css" />
+        <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
 
     </head>
     <body jsf:id="body">
@@ -65,9 +64,9 @@
                     <br />
                     <br />
 
-                    <a href="#" class="btn btn-primary buttons"
+                    <a href="#" class="btn btn-sucess buttons"
                        jsf:action="#{}">Salvar</a>
-                    <a href="#" class="btn btn-primary"
+                    <a href="#" class="btn btn-danger"
                        jsf:action="#{}">Excluir</a>
 
                     <br />
