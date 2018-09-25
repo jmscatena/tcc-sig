@@ -16,80 +16,96 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     </head>
-    <body jsf:id="body">
-        <form jsf:id="form" jsf:prependId="false">
-            <div class="outscreen">
-                <div class="inscreen form-group">
-                    <label class="title">Cadastro do Trabalho de Curso</label>
-                    <br/>
-                    <br/>
+    <body jsf:id="body" style="background-color:#dde9fe;">
+               <form jsf:id="form" jsf:prependId="false">
+            <div class="container-fluid">
+                <br />
+                <div class="row">
+                    <div class="col">
+                              <div class="card" style="width:580px;border-radius: 25px;">
+                                  <div id="imgcard">
+                                      <label class="title">Cadastro de TCCs</label>
+                                      <hr />
+                                  </div>
+                                    <div class="card-body">
+                                        
+                                        <label> Aluno </label>
+                                        <input type="text" jsf:id="aluno" style="margin-left: 38px !important;" class="textlong form-control"
+                                               jsf:value="#{}"/>
+                                        <br />
+                                        <br />
 
-                    <label> Aluno </label>
-                    <input type="text" jsf:id="aluno" style="margin-left: 72px !important;" class="textlong form-control"
-                           jsf:value="#{}"/>
-                    <br />
-                    <br />
+                                        <label> Orientador </label>
+                                        <input type="text" jsf:id="orientador" class="textlong form-control"
+                                               jsf:value="#{}"/>
+                                        <br />
+                                        <br />
 
-                    <label> Orientador </label>
-                    <input type="text" jsf:id="orientador" style="margin-left:40px;" class="textlong form-control"
-                           jsf:value="#{}"/>
-                    <br />
-                    <br />
+                                        <label> Título </label>
+                                        <input type="text" jsf:id="projeto" style="margin-left: 5px;" class="texttile form-control"
+                                               jsf:value="#{}" />
+                                        <br />
+                                        <br />
 
-                    <label> Título </label>
-                    <input type="text" jsf:id="projeto" style="margin-left: 5px;" class="texttile form-control"
-                           jsf:value="#{}" />
-                    <br />
-                    <br />
+                                        <label> Início da Orientação </label>
+                                        <input type="date" jsf:id="datainicio" style="margin-left: 31px !important;"
+                                               class="textshort form-control"
+                                               jsf:value="#{}" />
+                                        <br/>
+                                        <br/>
+                                        <label> Previsão de Finalização </label>
+                                        <input type="date" jsf:id="datafim" 
+                                               class="textshort form-control"
+                                               jsf:value="#{}" />
+                                        <br/>
+                                        <br/>
 
-                    <label> Início da Orientação </label>
-                    <input type="date" jsf:id="datainicio" style="margin-left: 33px !important;"
-                           class="textshort form-control"
-                           jsf:value="#{}" />
-                    <br/>
-                    <br/>
-                    <label> Previsão de Finalização </label>
-                    <input type="date" jsf:id="datafim" style="margin-left: 70px;"
-                           class="textshort form-control"
-                           jsf:value="#{}" />
-                    <br/>
-                    <br/>
+                                        <label style="vertical-align: middle;height: 100px;"> Tema do Projeto </label>
+                                        <textarea jsf:id="area" style="width:350px;height: 200px;margin-left: 15px;"
+                                             class="textarea form-control" jsf:value="#{}"></textarea> 
 
-                    <label style="vertical-align: middle;height: 100px;"> Tema do Projeto </label>
-                    <textarea jsf:id="area" style="width:350px;height: 200px;margin-left: 15px;"
-                         class="textarea form-control" jsf:value="#{}"></textarea> 
 
-                    <br />
-                    <br />
+                                        <a href="#" class="btn btn-outline-primary buttons"
+                                           jsf:action="#{}">Solicitação de Orientação</a>
 
-                    <a href="#" class="btn btn-outline-success buttons""
-                       jsf:action="#{}">Aceite</a>
-                    <a href="#" class="btn btn-outline-danger"
-                       jsf:action="#{}">Recusa </a>
-
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-               </div>
-               <div class="tablescreen">
-                    <label class="title">Orientadores</label>
-                    <br />
-                    <table class="table table-striped table-hover" >
-                        <tr>
-                            <td>Nome</td>
-                            <td>Área</td>
-                        </tr>
-                        <ui:repeat var="contato" value="#{beanContato.listar()}" >
-                            <tr>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </ui:repeat>
-                    </table> 
-               </div>
-           </div>
-            
+                                    </div>
+                               </div>
+                    </div>
+                                            
+                        <div class="col">
+                                  <div class="card" style="width:400px;border-radius: 25px;">
+                                      <div class="imgcard">
+                                        <label class="title">Orientadores</label>
+                                          <hr />
+                                      </div>
+                                        <div class="card-body">
+                                        <table class="table table-striped table-hover" >
+                                            <tr>
+                                                <td>Nome</td>
+                                                <td>Área</td>
+                                            </tr>
+                                            <ui:repeat var="contato" value="#{beanContato.listar()}" >
+                                                <tr>
+                                                    <td><a href="">Jean Miler Scatena</a></td>
+                                                    <td>Segurança, SO, Programação, Redes</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Renato Violin</td>
+                                                    <td>Programação, Web, Arduino</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Fernando Marco Perez Campus</td>
+                                                    <td>Hardware, Arduino, Robótica</td>
+                                                </tr>
+                                            </ui:repeat>
+                                        </table> 
+                                        <br/><br/>
+                                    </div>
+                                  </div>
+                        </div>
+                </div>
+                <br/>
+                </div>
         </form>
     </body>
 

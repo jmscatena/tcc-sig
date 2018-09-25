@@ -16,6 +16,10 @@
     /*margin-right:15%;
     margin-left:25%;  */
     border-radius: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .textlong{
@@ -50,6 +54,34 @@
 }
 
 .imgcard img{
+    width:150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#imgcardorientados{
+    
+    width:800px;
+    /*background-color: #ccd0db;*/
+    align-content: center;
+}
+
+#imgcardorientados img{
+    width:150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#imgcardorientacao{
+    
+    width:580px;
+    /*background-color: #ccd0db;*/
+    align-content: center;
+}
+
+#imgcardorientacao img{
     width:150px;
     display: block;
     margin-left: auto;
