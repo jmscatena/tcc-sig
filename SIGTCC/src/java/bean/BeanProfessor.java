@@ -1,21 +1,56 @@
 
 package bean;
 
+import dao.ProfessorDAO;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import model.Professor;
 
 /**
  *
  * @author Prof.Jean Miler Scatena
  * @see Bean Gerenciado para Cadastro de Professores
- * @version 0.1
- * @date 09-21-2018
+ * @version 0.2
+ * @date 09-25-2018
  */
 @ManagedBean
-@RequestScoped
-public class BeanProfessor {
+@ViewScoped
+public class BeanProfessor implements Serializable{
 
+    private ProfessorDAO dao;
+    private Professor professor;
     public BeanProfessor() {
+        dao = new ProfessorDAO(javax.persistence.Persistence.createEntityManagerFactory("SIGTCCPU"));
+        this.professor = new Professor();
+
     }
+
+    public boolean insertProfessor(){
+        if(!professor.getNome().isEmpty())
+        {
+            dao.create(professor);
+            return true;
+        }else return false;
+        
+    }
+    
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = new Professor();
+    }
+    
+    public List<Professor> getProfessores(){
+        return dao.findProfessoresEntities();
+    }
+    
     
 }

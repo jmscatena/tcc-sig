@@ -69,10 +69,10 @@ public class Tcc implements Serializable {
     private List<Acompanhamento> acompanhamentoList;
     @JoinColumn(name = "id_alunos", referencedColumnName = "id")
     @OneToOne
-    private Alunos idAlunos;
+    private Aluno idAlunos;
     @JoinColumn(name = "id_professores", referencedColumnName = "id")
     @ManyToOne
-    private Professores idProfessores;
+    private Professor idProfessores;
     @JoinColumn(name = "id_tipotcc", referencedColumnName = "id")
     @OneToOne
     private Tipotcc idTipotcc;
@@ -148,19 +148,19 @@ public class Tcc implements Serializable {
         this.acompanhamentoList = acompanhamentoList;
     }
 
-    public Alunos getIdAlunos() {
+    public Aluno getIdAlunos() {
         return idAlunos;
     }
 
-    public void setIdAlunos(Alunos idAlunos) {
+    public void setIdAlunos(Aluno idAlunos) {
         this.idAlunos = idAlunos;
     }
 
-    public Professores getIdProfessores() {
+    public Professor getIdProfessores() {
         return idProfessores;
     }
 
-    public void setIdProfessores(Professores idProfessores) {
+    public void setIdProfessores(Professor idProfessores) {
         this.idProfessores = idProfessores;
     }
 

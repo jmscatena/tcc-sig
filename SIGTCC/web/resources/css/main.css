@@ -39,6 +39,7 @@
     display:inline !important;  
 }
 
+/* Definicao de textarea do projeto */
 .textarea{
     width:350px !important;
     height: 200px !important;
@@ -60,9 +61,17 @@
     margin-right: auto;
 }
 
+/* cria a borda arrendondada e alinha o div ao centro */
+.cardplus{
+    border-radius: 25px;
+    margin: auto;
+    display:block;
+    
+}
+
 #imgcardorientados{
     
-    width:800px;
+    width:690px;
     /*background-color: #ccd0db;*/
     align-content: center;
 }
@@ -82,6 +91,20 @@
 }
 
 #imgcardorientacao img{
+    width:150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#imgcardcoordenacao{
+    
+    width:450px;
+    /*background-color: #ccd0db;*/
+    align-content: center;
+}
+
+#imgcardcoordenacao img{
     width:150px;
     display: block;
     margin-left: auto;

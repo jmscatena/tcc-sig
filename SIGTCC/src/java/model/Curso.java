@@ -47,7 +47,7 @@ public class Curso implements Serializable {
     @Column(name = "turma")
     private String turma;
     @OneToOne(mappedBy = "idCurso")
-    private Alunos alunos;
+    private Aluno alunos;
 
     public Curso() {
     }
@@ -93,11 +93,11 @@ public class Curso implements Serializable {
         this.turma = turma;
     }
 
-    public Alunos getAlunos() {
+    public Aluno getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(Alunos alunos) {
+    public void setAlunos(Aluno alunos) {
         this.alunos = alunos;
     }
 

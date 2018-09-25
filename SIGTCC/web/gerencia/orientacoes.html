@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf">
+          
+    <head jsf:id="head">
+        <title>Acompanhamento de Orientação</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <script src="../resources/jquery/jquery-3.3.1.js"></script>
+        <script src="../resources/bootstrap/js/bootstrap.js"></script>
+
+        <link rel="stylesheet" href="../resources/css/main.css" />
+        <link rel="stylesheet" href="../resources/css/screen.css" />
+        <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    </head>
+    <body jsf:id="body">
+        <form jsf:id="form" jsf:prependId="false">
+            <div class="outscreen">
+                <div class="inscreen form-group">
+                    <label class="title">Reuniões de Orientação</label>
+                    <br/>
+                    <br/>
+
+                    <label> Orientador </label>
+                    <input type="text" jsf:id="nome" style="margin-left: 60px;" class="textlong form-control"
+                           jsf:value="#{}"/>
+                    <br />
+                    <br />
+
+
+                    <label> Orientado </label>
+
+                    <div class="dropdown" style="margin-left:58px;">
+                        <button class="btn btn-default dropdown-toggle" 
+                                type="button" id="alunos" data-toggle="dropdown">Aluno
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                            <ui:repeat var="lista" value="#{}">
+                                <li role="presentation">
+                                    <!-- beanLigacoes.adiconar_contato(lista) adiciona em outro bean (chave estrangeira) -->
+                                    <a role="menuitem" tabindex="-1" href="#" jsf:action="#{beanLigacoes.adiconar_contato(lista)}">
+                                        #{lista.nome}
+                                    </a>
+                            </li>
+                          </ui:repeat>
+                        </ul>
+                      </div>
+                    <br/>
+                    <br/>
+                    <label> Data Orientação </label>
+                    <input type="date" jsf:id="datainicio" style="margin-left: 70px;" 
+                           class="textshort form-control" jsf:value="#{}" />
+                    <br/>
+                    <br/>
+                    <label style="vertical-align: middle;margin-top:0px;"> Observações </label>
+                    <textarea jsf:id="area" class="textarea form-control"
+                           jsf:value="#{}"></textarea> 
+
+                    <br />
+                    <br />
+
+                    <a href="#" class="btn btn-outline-success buttons"
+                       jsf:action="#{}">Gravar</a>
+                    <a href="#" class="btn btn-outline-danger"
+                       jsf:action="#{}">Cancelar </a>
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+               </div>
+               <div class="tablescreen">
+                    <label class="title">Últimas Orientações</label>
+                    <br />
+                    <table class="table table-striped table-hover" >
+                        <tr>
+                            <td>Aluno</td>
+                            <td>Curso</td>
+                        </tr>
+                        <ui:repeat var="contato" value="#{beanContato.listar()}" >
+                            <tr>
+                                <td>#{}</td>
+                                <td>#{}</td>
+                            </tr>
+                        </ui:repeat>
+                    </table> 
+               </div>
+           </div>
+            
+        </form>
+    </body>
+
+</html>
+

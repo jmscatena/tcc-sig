@@ -16,7 +16,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.Tcc;
 import model.Acesso;
-import model.Alunos;
+import model.Aluno;
 import model.Curso;
 
 /**
@@ -34,7 +34,7 @@ public class AlunosDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Alunos alunos) {
+    public void create(Aluno alunos) {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -56,7 +56,7 @@ public class AlunosDAO implements Serializable {
             }
             em.persist(alunos);
             if (tcc != null) {
-                Alunos oldIdAlunosOfTcc = tcc.getIdAlunos();
+                Aluno oldIdAlunosOfTcc = tcc.getIdAlunos();
                 if (oldIdAlunosOfTcc != null) {
                     oldIdAlunosOfTcc.setTcc(null);
                     oldIdAlunosOfTcc = em.merge(oldIdAlunosOfTcc);
@@ -65,7 +65,7 @@ public class AlunosDAO implements Serializable {
                 tcc = em.merge(tcc);
             }
             if (idAcesso != null) {
-                Alunos oldAlunosOfIdAcesso = idAcesso.getAlunos();
+                Aluno oldAlunosOfIdAcesso = idAcesso.getAlunos();
                 if (oldAlunosOfIdAcesso != null) {
                     oldAlunosOfIdAcesso.setIdAcesso(null);
                     oldAlunosOfIdAcesso = em.merge(oldAlunosOfIdAcesso);
@@ -74,7 +74,7 @@ public class AlunosDAO implements Serializable {
                 idAcesso = em.merge(idAcesso);
             }
             if (idCurso != null) {
-                Alunos oldAlunosOfIdCurso = idCurso.getAlunos();
+                Aluno oldAlunosOfIdCurso = idCurso.getAlunos();
                 if (oldAlunosOfIdCurso != null) {
                     oldAlunosOfIdCurso.setIdCurso(null);
                     oldAlunosOfIdCurso = em.merge(oldAlunosOfIdCurso);
@@ -90,12 +90,12 @@ public class AlunosDAO implements Serializable {
         }
     }
 
-    public void edit(Alunos alunos) throws NonexistentEntityException, Exception {
+    public void edit(Aluno alunos) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Alunos persistentAlunos = em.find(Alunos.class, alunos.getId());
+            Aluno persistentAlunos = em.find(Aluno.class, alunos.getId());
             Tcc tccOld = persistentAlunos.getTcc();
             Tcc tccNew = alunos.getTcc();
             Acesso idAcessoOld = persistentAlunos.getIdAcesso();
@@ -120,7 +120,7 @@ public class AlunosDAO implements Serializable {
                 tccOld = em.merge(tccOld);
             }
             if (tccNew != null && !tccNew.equals(tccOld)) {
-                Alunos oldIdAlunosOfTcc = tccNew.getIdAlunos();
+                Aluno oldIdAlunosOfTcc = tccNew.getIdAlunos();
                 if (oldIdAlunosOfTcc != null) {
                     oldIdAlunosOfTcc.setTcc(null);
                     oldIdAlunosOfTcc = em.merge(oldIdAlunosOfTcc);
@@ -133,7 +133,7 @@ public class AlunosDAO implements Serializable {
                 idAcessoOld = em.merge(idAcessoOld);
             }
             if (idAcessoNew != null && !idAcessoNew.equals(idAcessoOld)) {
-                Alunos oldAlunosOfIdAcesso = idAcessoNew.getAlunos();
+                Aluno oldAlunosOfIdAcesso = idAcessoNew.getAlunos();
                 if (oldAlunosOfIdAcesso != null) {
                     oldAlunosOfIdAcesso.setIdAcesso(null);
                     oldAlunosOfIdAcesso = em.merge(oldAlunosOfIdAcesso);
@@ -146,7 +146,7 @@ public class AlunosDAO implements Serializable {
                 idCursoOld = em.merge(idCursoOld);
             }
             if (idCursoNew != null && !idCursoNew.equals(idCursoOld)) {
-                Alunos oldAlunosOfIdCurso = idCursoNew.getAlunos();
+                Aluno oldAlunosOfIdCurso = idCursoNew.getAlunos();
                 if (oldAlunosOfIdCurso != null) {
                     oldAlunosOfIdCurso.setIdCurso(null);
                     oldAlunosOfIdCurso = em.merge(oldAlunosOfIdCurso);
@@ -176,9 +176,9 @@ public class AlunosDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Alunos alunos;
+            Aluno alunos;
             try {
-                alunos = em.getReference(Alunos.class, id);
+                alunos = em.getReference(Aluno.class, id);
                 alunos.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The alunos with id " + id + " no longer exists.", enfe);
@@ -207,19 +207,19 @@ public class AlunosDAO implements Serializable {
         }
     }
 
-    public List<Alunos> findAlunosEntities() {
+    public List<Aluno> findAlunosEntities() {
         return findAlunosEntities(true, -1, -1);
     }
 
-    public List<Alunos> findAlunosEntities(int maxResults, int firstResult) {
+    public List<Aluno> findAlunosEntities(int maxResults, int firstResult) {
         return findAlunosEntities(false, maxResults, firstResult);
     }
 
-    private List<Alunos> findAlunosEntities(boolean all, int maxResults, int firstResult) {
+    private List<Aluno> findAlunosEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Alunos.class));
+            cq.select(cq.from(Aluno.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -231,10 +231,10 @@ public class AlunosDAO implements Serializable {
         }
     }
 
-    public Alunos findAlunos(Integer id) {
+    public Aluno findAlunos(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Alunos.class, id);
+            return em.find(Aluno.class, id);
         } finally {
             em.close();
         }
@@ -244,7 +244,7 @@ public class AlunosDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Alunos> rt = cq.from(Alunos.class);
+            Root<Aluno> rt = cq.from(Aluno.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

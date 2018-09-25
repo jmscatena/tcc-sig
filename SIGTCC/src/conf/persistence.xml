@@ -3,12 +3,12 @@
   <persistence-unit name="SIGTCCPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>model.Tcc</class>
-    <class>model.Alunos</class>
     <class>model.Acesso</class>
-    <class>model.Professores</class>
     <class>model.Curso</class>
     <class>model.Tipotcc</class>
     <class>model.Acompanhamento</class>
+    <class>model.Professor</class>
+    <class>model.Aluno</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sig_tcc"/>
