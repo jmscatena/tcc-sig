@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,25 +16,29 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author jscatena
  */
 @Entity
-@Table(name = "alunos")
+@Table(name = "professores")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Alunos.findAll", query = "SELECT a FROM Alunos a")
-    , @NamedQuery(name = "Alunos.findById", query = "SELECT a FROM Alunos a WHERE a.id = :id")
-    , @NamedQuery(name = "Alunos.findByRa", query = "SELECT a FROM Alunos a WHERE a.ra = :ra")
-    , @NamedQuery(name = "Alunos.findByNome", query = "SELECT a FROM Alunos a WHERE a.nome = :nome")
-    , @NamedQuery(name = "Alunos.findByEmail", query = "SELECT a FROM Alunos a WHERE a.email = :email")
-    , @NamedQuery(name = "Alunos.findByTelefone", query = "SELECT a FROM Alunos a WHERE a.telefone = :telefone")})
-public class Aluno implements Serializable {
+    @NamedQuery(name = "Professores.findAll", query = "SELECT p FROM Professores p")
+    , @NamedQuery(name = "Professores.findById", query = "SELECT p FROM Professores p WHERE p.id = :id")
+    , @NamedQuery(name = "Professores.findByRegistro", query = "SELECT p FROM Professores p WHERE p.registro = :registro")
+    , @NamedQuery(name = "Professores.findByNome", query = "SELECT p FROM Professores p WHERE p.nome = :nome")
+    , @NamedQuery(name = "Professores.findByEmail", query = "SELECT p FROM Professores p WHERE p.email = :email")
+    , @NamedQuery(name = "Professores.findByTelefone", query = "SELECT p FROM Professores p WHERE p.telefone = :telefone")
+    , @NamedQuery(name = "Professores.findByArea", query = "SELECT p FROM Professores p WHERE p.area = :area")
+    , @NamedQuery(name = "Professores.findByCoordenador", query = "SELECT p FROM Professores p WHERE p.coordenador = :coordenador")})
+public class Professores implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,8 +47,8 @@ public class Aluno implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(name = "ra")
-    private String ra;
+    @Column(name = "registro")
+    private int registro;
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
@@ -53,25 +58,26 @@ public class Aluno implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefone")
     private String telefone;
-    @OneToOne(mappedBy = "idAlunos")
-    private Tcc tcc;
+    @Column(name = "area")
+    private String area;
+    @Column(name = "coordenador")
+    private Boolean coordenador;
+    @OneToMany(mappedBy = "idProfessores")
+    private List<Tcc> tccList;
     @JoinColumn(name = "id_acesso", referencedColumnName = "id")
     @OneToOne
     private Acesso idAcesso;
-    @JoinColumn(name = "id_curso", referencedColumnName = "id")
-    @OneToOne
-    private Curso idCurso;
 
-    public Aluno() {
+    public Professores() {
     }
 
-    public Aluno(Integer id) {
+    public Professores(Integer id) {
         this.id = id;
     }
 
-    public Aluno(Integer id, String ra, String nome, String email, String telefone) {
+    public Professores(Integer id, int registro, String nome, String email, String telefone) {
         this.id = id;
-        this.ra = ra;
+        this.registro = registro;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
@@ -85,12 +91,12 @@ public class Aluno implements Serializable {
         this.id = id;
     }
 
-    public String getRa() {
-        return ra;
+    public int getRegistro() {
+        return registro;
     }
 
-    public void setRa(String ra) {
-        this.ra = ra;
+    public void setRegistro(int registro) {
+        this.registro = registro;
     }
 
     public String getNome() {
@@ -117,12 +123,29 @@ public class Aluno implements Serializable {
         this.telefone = telefone;
     }
 
-    public Tcc getTcc() {
-        return tcc;
+    public String getArea() {
+        return area;
     }
 
-    public void setTcc(Tcc tcc) {
-        this.tcc = tcc;
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public Boolean getCoordenador() {
+        return coordenador;
+    }
+
+    public void setCoordenador(Boolean coordenador) {
+        this.coordenador = coordenador;
+    }
+
+    @XmlTransient
+    public List<Tcc> getTccList() {
+        return tccList;
+    }
+
+    public void setTccList(List<Tcc> tccList) {
+        this.tccList = tccList;
     }
 
     public Acesso getIdAcesso() {
@@ -131,14 +154,6 @@ public class Aluno implements Serializable {
 
     public void setIdAcesso(Acesso idAcesso) {
         this.idAcesso = idAcesso;
-    }
-
-    public Curso getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(Curso idCurso) {
-        this.idCurso = idCurso;
     }
 
     @Override
@@ -151,10 +166,10 @@ public class Aluno implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Aluno)) {
+        if (!(object instanceof Professores)) {
             return false;
         }
-        Aluno other = (Aluno) object;
+        Professores other = (Professores) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -163,7 +178,7 @@ public class Aluno implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Alunos[ id=" + id + " ]";
+        return "model.Professores[ id=" + id + " ]";
     }
     
 }

@@ -7,9 +7,11 @@ package bean;
 
 import dao.AlunosDAO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import model.Aluno;
+import model.Alunos;
 
 /**
  *
@@ -20,10 +22,10 @@ import model.Aluno;
 public class BeanAluno {
 
     private AlunosDAO dao;
-    private Aluno aluno;
+    private Alunos aluno;
     public BeanAluno() {
         dao = new AlunosDAO(javax.persistence.Persistence.createEntityManagerFactory("SIGTCCPU"));
-        this.aluno = new Aluno();
+        this.aluno = new Alunos();
 
     }
 
@@ -36,18 +38,39 @@ public class BeanAluno {
         
     }
 
-    public Aluno getAluno() {
+    public boolean updateAluno(){
+        boolean success=false;
+        try {
+                dao.edit(aluno);
+                success = true;
+
+        } catch (Exception ex) {
+            success = false;    
+            Logger.getLogger(BeanProfessor.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return success;
+    }
+    
+    
+    public Alunos getAluno() {
         return aluno;
     }
 
-    public void setAluno(Aluno aluno) {
+    public void setAluno(Alunos aluno) {
         this.aluno = aluno;
     }
     
 
 
-    public List<Aluno> getAlunos(){
+    public List<Alunos> getAlunos(){
         return dao.findAlunosEntities();
+    }
+    
+    public Alunos findAluno(int id)
+    {
+        if(id>0)
+            return dao.findAlunos(id);
+        else return null;
     }
     
 

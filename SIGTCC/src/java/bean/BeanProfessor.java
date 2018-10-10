@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import model.Professor;
+import model.Professores;
 
 /**
  *
@@ -24,11 +24,10 @@ import model.Professor;
 public class BeanProfessor implements Serializable{
 
     private ProfessorDAO dao;
-    private Professor professor;
+    private Professores professor;
     public BeanProfessor() {
         dao = new ProfessorDAO(javax.persistence.Persistence.createEntityManagerFactory("SIGTCCPU"));
-        this.professor = new Professor();
-
+        this.professor = new Professores();
     }
 
     public boolean insertProfessor(){
@@ -37,19 +36,37 @@ public class BeanProfessor implements Serializable{
             dao.create(professor);
             return true;
         }else return false;
-        
     }
-    
-    public Professor getProfessor() {
+
+    public boolean updateProfessor(){
+        boolean success=false;
+        try {
+                dao.edit(professor);
+                success = true;
+
+        } catch (Exception ex) {
+            success = false;    
+            Logger.getLogger(BeanProfessor.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return success;
+    }
+        
+    public Professores getProfessor() {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = new Professor();
+    public void setProfessor(Professores professor) {
+        this.professor = new Professores();
     }
     
-    public List<Professor> getProfessores(){
+    public List<Professores> getProfessores(){
         return dao.findProfessoresEntities();
+    }
+    
+    public Professores findProfessor(int id){
+        if(id>0)
+            return dao.findProfessores(id);
+        else return null;
     }
     
     

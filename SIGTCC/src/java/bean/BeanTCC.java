@@ -7,9 +7,12 @@ package bean;
 
 import dao.TccDAO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Tcc;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import model.Alunos;
 
 /**
  *
@@ -26,6 +29,27 @@ public class BeanTCC {
         tcc = new Tcc();
     }
 
+    public boolean insertTcc(){
+        if(!tcc.getProjeto().isEmpty())
+        {
+            dao.create(tcc);
+            return true;
+        }else return false;
+    }
+
+    public boolean updateTcc(){
+        boolean success=false;
+        try {
+                dao.edit(tcc);
+                success = true;
+
+        } catch (Exception ex) {
+            success = false;    
+            Logger.getLogger(BeanProfessor.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        return success;
+    }
+   
     public Tcc getTcc() {
         return tcc;
     }
@@ -34,11 +58,19 @@ public class BeanTCC {
         this.tcc = tcc;
     }
     
-    
-    
     public List<Tcc> getTccs()
     {
         return dao.findTccEntities();
+    }
+    
+    public Tcc findTcc(Alunos aluno){
+        if(aluno != null)
+            return dao.findTcc(aluno);
+        else return null;
+    }
+    
+    public List<Tcc> getAceites(){
+        return dao.getAceites();
     }
     
 }

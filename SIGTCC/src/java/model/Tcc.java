@@ -36,11 +36,15 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Tcc.findAll", query = "SELECT t FROM Tcc t")
     , @NamedQuery(name = "Tcc.findById", query = "SELECT t FROM Tcc t WHERE t.id = :id")
+    , @NamedQuery(name = "Tcc.findByAluno", query = "SELECT t FROM Tcc t WHERE t.idAlunos = :idaluno")
     , @NamedQuery(name = "Tcc.findByTema", query = "SELECT t FROM Tcc t WHERE t.tema = :tema")
     , @NamedQuery(name = "Tcc.findByProjeto", query = "SELECT t FROM Tcc t WHERE t.projeto = :projeto")
     , @NamedQuery(name = "Tcc.findByDtInicio", query = "SELECT t FROM Tcc t WHERE t.dtInicio = :dtInicio")
     , @NamedQuery(name = "Tcc.findByDtTermino", query = "SELECT t FROM Tcc t WHERE t.dtTermino = :dtTermino")
-    , @NamedQuery(name = "Tcc.findByDtDefesa", query = "SELECT t FROM Tcc t WHERE t.dtDefesa = :dtDefesa")})
+    , @NamedQuery(name = "Tcc.findByDtDefesa", query = "SELECT t FROM Tcc t WHERE t.dtDefesa = :dtDefesa")
+    , @NamedQuery(name = "Tcc.findByFinalizado", query = "SELECT t FROM Tcc t WHERE t.finalizado = :finalizado")
+    , @NamedQuery(name = "Tcc.findByAceite", query = "SELECT t FROM Tcc t WHERE t.aceite = :aceite")
+    , @NamedQuery(name = "Tcc.findByRequisicao", query = "SELECT t FROM Tcc t WHERE t.requisicao = :requisicao")})
 public class Tcc implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,14 +69,21 @@ public class Tcc implements Serializable {
     @Column(name = "dt_defesa")
     @Temporal(TemporalType.DATE)
     private Date dtDefesa;
+    @Column(name = "finalizado")
+    private Boolean finalizado;
+    @Basic(optional = false)
+    @Column(name = "aceite")
+    private boolean aceite;
+    @Column(name = "requisicao")
+    private Boolean requisicao;
     @OneToMany(mappedBy = "idTcc")
     private List<Acompanhamento> acompanhamentoList;
     @JoinColumn(name = "id_alunos", referencedColumnName = "id")
     @OneToOne
-    private Aluno idAlunos;
+    private Alunos idAlunos;
     @JoinColumn(name = "id_professores", referencedColumnName = "id")
     @ManyToOne
-    private Professor idProfessores;
+    private Professores idProfessores;
     @JoinColumn(name = "id_tipotcc", referencedColumnName = "id")
     @OneToOne
     private Tipotcc idTipotcc;
@@ -84,11 +95,12 @@ public class Tcc implements Serializable {
         this.id = id;
     }
 
-    public Tcc(Integer id, String tema, String projeto, Date dtInicio) {
+    public Tcc(Integer id, String tema, String projeto, Date dtInicio, boolean aceite) {
         this.id = id;
         this.tema = tema;
         this.projeto = projeto;
         this.dtInicio = dtInicio;
+        this.aceite = aceite;
     }
 
     public Integer getId() {
@@ -139,6 +151,30 @@ public class Tcc implements Serializable {
         this.dtDefesa = dtDefesa;
     }
 
+    public Boolean getFinalizado() {
+        return finalizado;
+    }
+
+    public void setFinalizado(Boolean finalizado) {
+        this.finalizado = finalizado;
+    }
+
+    public boolean getAceite() {
+        return aceite;
+    }
+
+    public void setAceite(boolean aceite) {
+        this.aceite = aceite;
+    }
+
+    public Boolean getRequisicao() {
+        return requisicao;
+    }
+
+    public void setRequisicao(Boolean requisicao) {
+        this.requisicao = requisicao;
+    }
+
     @XmlTransient
     public List<Acompanhamento> getAcompanhamentoList() {
         return acompanhamentoList;
@@ -148,19 +184,19 @@ public class Tcc implements Serializable {
         this.acompanhamentoList = acompanhamentoList;
     }
 
-    public Aluno getIdAlunos() {
+    public Alunos getIdAlunos() {
         return idAlunos;
     }
 
-    public void setIdAlunos(Aluno idAlunos) {
+    public void setIdAlunos(Alunos idAlunos) {
         this.idAlunos = idAlunos;
     }
 
-    public Professor getIdProfessores() {
+    public Professores getIdProfessores() {
         return idProfessores;
     }
 
-    public void setIdProfessores(Professor idProfessores) {
+    public void setIdProfessores(Professores idProfessores) {
         this.idProfessores = idProfessores;
     }
 

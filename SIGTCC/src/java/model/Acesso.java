@@ -45,9 +45,9 @@ public class Acesso implements Serializable {
     @Column(name = "pass")
     private String pass;
     @OneToOne(mappedBy = "idAcesso")
-    private Aluno alunos;
+    private Alunos alunos;
     @OneToOne(mappedBy = "idAcesso")
-    private Professor professores;
+    private Professores professores;
 
     public Acesso() {
     }
@@ -86,19 +86,19 @@ public class Acesso implements Serializable {
         this.pass = pass;
     }
 
-    public Aluno getAlunos() {
+    public Alunos getAlunos() {
         return alunos;
     }
 
-    public void setAlunos(Aluno alunos) {
+    public void setAlunos(Alunos alunos) {
         this.alunos = alunos;
     }
 
-    public Professor getProfessores() {
+    public Professores getProfessores() {
         return professores;
     }
 
-    public void setProfessores(Professor professores) {
+    public void setProfessores(Professores professores) {
         this.professores = professores;
     }
 

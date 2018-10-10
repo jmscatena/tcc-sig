@@ -15,8 +15,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import model.Acesso;
-import model.Aluno;
-import model.Professor;
+import model.Alunos;
+import model.Professores;
 
 /**
  *
@@ -38,12 +38,12 @@ public class AcessoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Aluno alunos = acesso.getAlunos();
+            Alunos alunos = acesso.getAlunos();
             if (alunos != null) {
                 alunos = em.getReference(alunos.getClass(), alunos.getId());
                 acesso.setAlunos(alunos);
             }
-            Professor professores = acesso.getProfessores();
+            Professores professores = acesso.getProfessores();
             if (professores != null) {
                 professores = em.getReference(professores.getClass(), professores.getId());
                 acesso.setProfessores(professores);
@@ -81,10 +81,10 @@ public class AcessoDAO implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Acesso persistentAcesso = em.find(Acesso.class, acesso.getId());
-            Aluno alunosOld = persistentAcesso.getAlunos();
-            Aluno alunosNew = acesso.getAlunos();
-            Professor professoresOld = persistentAcesso.getProfessores();
-            Professor professoresNew = acesso.getProfessores();
+            Alunos alunosOld = persistentAcesso.getAlunos();
+            Alunos alunosNew = acesso.getAlunos();
+            Professores professoresOld = persistentAcesso.getProfessores();
+            Professores professoresNew = acesso.getProfessores();
             if (alunosNew != null) {
                 alunosNew = em.getReference(alunosNew.getClass(), alunosNew.getId());
                 acesso.setAlunos(alunosNew);
@@ -149,12 +149,12 @@ public class AcessoDAO implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The acesso with id " + id + " no longer exists.", enfe);
             }
-            Aluno alunos = acesso.getAlunos();
+            Alunos alunos = acesso.getAlunos();
             if (alunos != null) {
                 alunos.setIdAcesso(null);
                 alunos = em.merge(alunos);
             }
-            Professor professores = acesso.getProfessores();
+            Professores professores = acesso.getProfessores();
             if (professores != null) {
                 professores.setIdAcesso(null);
                 professores = em.merge(professores);

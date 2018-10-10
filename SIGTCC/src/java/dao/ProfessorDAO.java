@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import model.Professor;
+import model.Professores;
 
 /**
  *
@@ -34,7 +34,7 @@ public class ProfessorDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Professor professores) {
+    public void create(Professores professores) {
         if (professores.getTccList() == null) {
             professores.setTccList(new ArrayList<Tcc>());
         }
@@ -55,7 +55,7 @@ public class ProfessorDAO implements Serializable {
             professores.setTccList(attachedTccList);
             em.persist(professores);
             if (idAcesso != null) {
-                Professor oldProfessoresOfIdAcesso = idAcesso.getProfessores();
+                Professores oldProfessoresOfIdAcesso = idAcesso.getProfessores();
                 if (oldProfessoresOfIdAcesso != null) {
                     oldProfessoresOfIdAcesso.setIdAcesso(null);
                     oldProfessoresOfIdAcesso = em.merge(oldProfessoresOfIdAcesso);
@@ -64,7 +64,7 @@ public class ProfessorDAO implements Serializable {
                 idAcesso = em.merge(idAcesso);
             }
             for (Tcc tccListTcc : professores.getTccList()) {
-                Professor oldIdProfessoresOfTccListTcc = tccListTcc.getIdProfessores();
+                Professores oldIdProfessoresOfTccListTcc = tccListTcc.getIdProfessores();
                 tccListTcc.setIdProfessores(professores);
                 tccListTcc = em.merge(tccListTcc);
                 if (oldIdProfessoresOfTccListTcc != null) {
@@ -80,12 +80,12 @@ public class ProfessorDAO implements Serializable {
         }
     }
 
-    public void edit(Professor professores) throws NonexistentEntityException, Exception {
+    public void edit(Professores professores) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Professor persistentProfessores = em.find(Professor.class, professores.getId());
+            Professores persistentProfessores = em.find(Professores.class, professores.getId());
             Acesso idAcessoOld = persistentProfessores.getIdAcesso();
             Acesso idAcessoNew = professores.getIdAcesso();
             List<Tcc> tccListOld = persistentProfessores.getTccList();
@@ -107,7 +107,7 @@ public class ProfessorDAO implements Serializable {
                 idAcessoOld = em.merge(idAcessoOld);
             }
             if (idAcessoNew != null && !idAcessoNew.equals(idAcessoOld)) {
-                Professor oldProfessoresOfIdAcesso = idAcessoNew.getProfessores();
+                Professores oldProfessoresOfIdAcesso = idAcessoNew.getProfessores();
                 if (oldProfessoresOfIdAcesso != null) {
                     oldProfessoresOfIdAcesso.setIdAcesso(null);
                     oldProfessoresOfIdAcesso = em.merge(oldProfessoresOfIdAcesso);
@@ -123,7 +123,7 @@ public class ProfessorDAO implements Serializable {
             }
             for (Tcc tccListNewTcc : tccListNew) {
                 if (!tccListOld.contains(tccListNewTcc)) {
-                    Professor oldIdProfessoresOfTccListNewTcc = tccListNewTcc.getIdProfessores();
+                    Professores oldIdProfessoresOfTccListNewTcc = tccListNewTcc.getIdProfessores();
                     tccListNewTcc.setIdProfessores(professores);
                     tccListNewTcc = em.merge(tccListNewTcc);
                     if (oldIdProfessoresOfTccListNewTcc != null && !oldIdProfessoresOfTccListNewTcc.equals(professores)) {
@@ -154,9 +154,9 @@ public class ProfessorDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Professor professores;
+            Professores professores;
             try {
-                professores = em.getReference(Professor.class, id);
+                professores = em.getReference(Professores.class, id);
                 professores.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The professores with id " + id + " no longer exists.", enfe);
@@ -180,19 +180,19 @@ public class ProfessorDAO implements Serializable {
         }
     }
 
-    public List<Professor> findProfessoresEntities() {
+    public List<Professores> findProfessoresEntities() {
         return findProfessoresEntities(true, -1, -1);
     }
 
-    public List<Professor> findProfessoresEntities(int maxResults, int firstResult) {
+    public List<Professores> findProfessoresEntities(int maxResults, int firstResult) {
         return findProfessoresEntities(false, maxResults, firstResult);
     }
 
-    private List<Professor> findProfessoresEntities(boolean all, int maxResults, int firstResult) {
+    private List<Professores> findProfessoresEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Professor.class));
+            cq.select(cq.from(Professores.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -204,10 +204,10 @@ public class ProfessorDAO implements Serializable {
         }
     }
 
-    public Professor findProfessores(Integer id) {
+    public Professores findProfessores(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Professor.class, id);
+            return em.find(Professores.class, id);
         } finally {
             em.close();
         }
@@ -217,7 +217,7 @@ public class ProfessorDAO implements Serializable {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Professor> rt = cq.from(Professor.class);
+            Root<Professores> rt = cq.from(Professores.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

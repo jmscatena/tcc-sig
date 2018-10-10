@@ -14,7 +14,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.Aluno;
+import model.Alunos;
 import model.Curso;
 
 /**
@@ -37,7 +37,7 @@ public class CursoDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Aluno alunos = curso.getAlunos();
+            Alunos alunos = curso.getAlunos();
             if (alunos != null) {
                 alunos = em.getReference(alunos.getClass(), alunos.getId());
                 curso.setAlunos(alunos);
@@ -66,8 +66,8 @@ public class CursoDAO implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Curso persistentCurso = em.find(Curso.class, curso.getId());
-            Aluno alunosOld = persistentCurso.getAlunos();
-            Aluno alunosNew = curso.getAlunos();
+            Alunos alunosOld = persistentCurso.getAlunos();
+            Alunos alunosNew = curso.getAlunos();
             if (alunosNew != null) {
                 alunosNew = em.getReference(alunosNew.getClass(), alunosNew.getId());
                 curso.setAlunos(alunosNew);
@@ -115,7 +115,7 @@ public class CursoDAO implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The curso with id " + id + " no longer exists.", enfe);
             }
-            Aluno alunos = curso.getAlunos();
+            Alunos alunos = curso.getAlunos();
             if (alunos != null) {
                 alunos.setIdCurso(null);
                 alunos = em.merge(alunos);

@@ -11,14 +11,15 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import model.Aluno;
-import model.Professor;
+import model.Alunos;
+import model.Professores;
 import model.Tipotcc;
 import model.Acompanhamento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 import model.Tcc;
 
 /**
@@ -44,12 +45,12 @@ public class TccDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Aluno idAlunos = tcc.getIdAlunos();
+            Alunos idAlunos = tcc.getIdAlunos();
             if (idAlunos != null) {
                 idAlunos = em.getReference(idAlunos.getClass(), idAlunos.getId());
                 tcc.setIdAlunos(idAlunos);
             }
-            Professor idProfessores = tcc.getIdProfessores();
+            Professores idProfessores = tcc.getIdProfessores();
             if (idProfessores != null) {
                 idProfessores = em.getReference(idProfessores.getClass(), idProfessores.getId());
                 tcc.setIdProfessores(idProfessores);
@@ -111,10 +112,10 @@ public class TccDAO implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Tcc persistentTcc = em.find(Tcc.class, tcc.getId());
-            Aluno idAlunosOld = persistentTcc.getIdAlunos();
-            Aluno idAlunosNew = tcc.getIdAlunos();
-            Professor idProfessoresOld = persistentTcc.getIdProfessores();
-            Professor idProfessoresNew = tcc.getIdProfessores();
+            Alunos idAlunosOld = persistentTcc.getIdAlunos();
+            Alunos idAlunosNew = tcc.getIdAlunos();
+            Professores idProfessoresOld = persistentTcc.getIdProfessores();
+            Professores idProfessoresNew = tcc.getIdProfessores();
             Tipotcc idTipotccOld = persistentTcc.getIdTipotcc();
             Tipotcc idTipotccNew = tcc.getIdTipotcc();
             List<Acompanhamento> acompanhamentoListOld = persistentTcc.getAcompanhamentoList();
@@ -219,12 +220,12 @@ public class TccDAO implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The tcc with id " + id + " no longer exists.", enfe);
             }
-            Aluno idAlunos = tcc.getIdAlunos();
+            Alunos idAlunos = tcc.getIdAlunos();
             if (idAlunos != null) {
                 idAlunos.setTcc(null);
                 idAlunos = em.merge(idAlunos);
             }
-            Professor idProfessores = tcc.getIdProfessores();
+            Professores idProfessores = tcc.getIdProfessores();
             if (idProfessores != null) {
                 idProfessores.getTccList().remove(tcc);
                 idProfessores = em.merge(idProfessores);
@@ -280,7 +281,29 @@ public class TccDAO implements Serializable {
             em.close();
         }
     }
+    
+    public Tcc findTcc(Alunos aluno){
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Tcc> query=em.createNamedQuery("Tcc.findByAluno", Tcc.class);
+            em.setProperty("idaluno", aluno);
+            return query.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
 
+    
+    public List<Tcc> getAceites(){
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Tcc> query=em.createNamedQuery("Tcc.findByAceite", Tcc.class);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
     public int getTccCount() {
         EntityManager em = getEntityManager();
         try {

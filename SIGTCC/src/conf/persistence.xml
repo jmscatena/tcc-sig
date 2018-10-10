@@ -9,6 +9,8 @@
     <class>model.Acompanhamento</class>
     <class>model.Professor</class>
     <class>model.Aluno</class>
+    <class>model.Alunos</class>
+    <class>model.Professores</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sig_tcc"/>
